@@ -1,16 +1,19 @@
 /* ============================================================
    RRC LAW ACADEMY — RESPONSIVE STYLES
-   Supports: 1920, 1440, 1366, 1200, 1024, 768, 600, 430, 390, 375
+   4-tier system: 1280px (desktop) / 1024px (small desktop/large
+   tablet) / 768px (tablet) / 480px (small phone).
+   Uniform card/item grids are fluid (repeat(auto-fit, minmax()))
+   in global.css, so no grid-template-columns overrides for those
+   grids are needed here.
    ============================================================ */
 
-/* Tablets / small laptops -------------------------------------- */
-
-@media (max-width: 1200px) {
-  .faculty-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+/* Desktop -----------------------------------------------------------
+   Fluid auto-fit grids already adapt between 1024px and 1280px, so
+   this tier needs no overrides. Kept to document the system. */
+@media (max-width: 1280px) {
 }
 
+/* Small desktop / large tablet -------------------------------------- */
 @media (max-width: 1024px) {
   .nav {
     display: none;
@@ -59,10 +62,6 @@
     max-width: 620px;
   }
 
-  .approach-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .featured-band {
     grid-template-columns: 1fr;
   }
@@ -71,13 +70,13 @@
     grid-template-columns: 1fr;
   }
 
+  .course-cols {
+    grid-template-columns: 1fr;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-  }
-
-  .contact-strip {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .course-swap {
@@ -85,102 +84,21 @@
   }
 }
 
-@media (max-width: 900px) {
-  .course-cols {
-    grid-template-columns: 1fr;
-  }
-
-  .programmes-grid {
-    grid-template-columns: 1fr;
-    max-width: 620px;
-    margin-inline: auto;
-  }
-}
-
+/* Tablet -------------------------------------------------------------- */
 @media (max-width: 768px) {
-  .highlights-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-/* Large phones --------------------------------------------------- */
-
-@media (max-width: 700px) {
   .footer-grid {
     grid-template-columns: 1fr;
   }
 
-  .mobile-menu {
-    max-height: calc(100dvh - 76px);
-  }
-}
-
-@media (max-width: 640px) {
-  .programmes-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .highlights-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .why-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .resources-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .faculty-grid {
-    grid-template-columns: 1fr;
-    max-width: 360px;
+  /* Single-column stacking for results: fluid floor is min 260px,
+     so a 480px cap yields one centred column at this tier. */
+  .results-grid {
+    max-width: 480px;
     margin-inline: auto;
-  }
-
-  .contact-strip {
-    grid-template-columns: 1fr;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
-  }
-
-  .approach-grid {
-    position: relative;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding-left: 1.25rem;
-  }
-
-  .approach-grid::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 5px;
-    width: 2px;
-    background: rgba(255, 255, 255, 0.18);
-  }
-
-  .approach-step {
-    position: relative;
-    padding-left: 2.5rem;
-  }
-
-  .approach-num {
-    position: absolute;
-    left: -1.25rem;
-    top: 1rem;
-    width: 40px;
-    height: 40px;
-    font-size: 0.95rem;
-  }
-
-  .approach-step h3 {
-    font-size: 1.05rem;
   }
 
   .course-card-actions {
@@ -196,21 +114,62 @@
   }
 
   .page-hero {
-    padding-block: 2.5rem;
+    padding-block: var(--space-7);
+  }
+
+  .hero-media-figure {
+    border-radius: var(--radius);
   }
 
   .reveal {
     transform: none;
   }
+
+  /* Approach becomes a vertical timeline on small screens */
+  .approach-grid {
+    position: relative;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-left: var(--space-5);
+  }
+
+  .approach-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .approach-step {
+    position: relative;
+    padding-left: var(--space-7);
+  }
+
+  .approach-num {
+    position: absolute;
+    left: -1.25rem;
+    top: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 0.95rem;
+  }
+
+  .approach-step h3 {
+    font-size: 1.05rem;
+  }
 }
 
+/* Small phone ----------------------------------------------------------- */
 @media (max-width: 480px) {
   .header-inner {
-    height: 64px;
+    height: var(--header-height-sm);
   }
 
   .mobile-menu {
-    top: 64px;
+    top: var(--header-height-sm);
   }
 
   .logo img {
@@ -224,7 +183,7 @@
 
   .hero-float {
     font-size: 0.82rem;
-    padding: 0.65rem 0.85rem;
+    padding: var(--space-3) var(--space-3);
     left: auto;
     right: auto;
     width: auto;
@@ -232,12 +191,12 @@
 
   .hero-float--top {
     position: static;
-    margin-top: 1rem;
+    margin-top: var(--space-4);
   }
 
   .hero-float--bottom {
     position: static;
-    margin-top: 0.75rem;
+    margin-top: var(--space-3);
   }
 
   .hero-media {
@@ -252,15 +211,15 @@
   }
 
   .section {
-    padding-block: 3.25rem;
+    padding-block: var(--space-7);
   }
 
   .cta-band {
-    padding: 2.25rem;
+    padding: var(--space-6);
   }
 
   .results-panel {
-    padding: 1.75rem;
+    padding: var(--space-6);
   }
 
   .about-experience-card {
@@ -268,11 +227,13 @@
     left: 0;
     bottom: 0;
   }
-}
 
-/* Small phones ---------------------------------------------------- */
+  /* Centres the single fluid column for faculty cards on phones */
+  .faculty-grid {
+    max-width: 360px;
+    margin-inline: auto;
+  }
 
-@media (max-width: 390px) {
   .hero-ctas .btn {
     width: 100%;
   }
@@ -311,31 +272,4 @@ video,
 svg {
   max-width: 100%;
   height: auto;
-}
-
-  .why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .resources-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .faculty-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .results-grid {
-    grid-template-columns: 1fr;
-    max-width: 480px;
-    margin-inline: auto;
-  }
-
-  .hero-media-figure {
-    border-radius: var(--radius);
-  }
 }
