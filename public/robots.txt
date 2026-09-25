@@ -1,0 +1,6 @@
+# RRC Law Academy — robots.txt
+# REPLACE with the academy's official sitemap URL after deployment.
+User-agent: *
+Allow: /
+
+Sitemap: https://replace-with-academy-domain.in/sitemap.xml
